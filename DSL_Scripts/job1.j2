@@ -3,7 +3,7 @@ job('maven_dsl') {
     description('Maven dsl project')
 
     scm {
-        git('https://github.com/Chaveen123/first-demo-project.git', 'master', {node -> node / 'extensions' << '' })
+        git('https://github.com/Chaveen123/first-demo-project.git', 'main', {node -> node / 'extensions' << '' })
     }
 
     steps {
