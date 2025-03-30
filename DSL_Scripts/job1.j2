@@ -3,27 +3,26 @@ job('maven_dsl') {
     description('Maven dsl project')
 
     scm {
-        git('https://github.com/Chaveen123/first-demo-project.git', 'master', {node -> node / 'extensions' << '' })
+        git('https://github.com/Chaveen123/first-demo-project.git', 'main', {node -> node / 'extensions' << '' })
     }
 
     steps {
         maven {
-            mavenInstallation('maven')
+            mavenInstallation('MAVEN_3.9.9')
             goals('-B -DskipTests clean package')
         }
         maven {
-            mavenInstallation('maven')
+            mavenInstallation('MAVEN_3.9.9')
             goals('test')
         }
         shell('''
             echo ************RUNNING THE JAR************************
-            java -jar /var/lib/jenkins/workspace/maven_dsl/target/my-app-1.0-SNAPSHOT.jar
+            java -jar /var/lib/jenkins/workspace/maven_dsl/target/first-demo-project-0.0.1-SNAPSHOT.jar
         ''')
     }
 
     publishers {
         archiveArtifacts('target/*.jar')
         archiveJunit('target/surefire-reports/*.xml')
-        mailer('valaxytech@gmail.com', true, true)
     }
 }
